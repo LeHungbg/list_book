@@ -1,28 +1,48 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+ <div id="app">
+    <div class="book-list">
+      <h1>List Book</h1>
+      <ListBook
+        @bookSelected="childSelected"
+      ></ListBook>
+    </div>
+    <div class="book-detail">
+      <h1>Book detail</h1>
+      <BookDetail
+        :bookdetail="bookSelectedfromchild"
+        :isActive="isActive1"
+        :checkdeleted="check1"
+      ></BookDetail>
+    </div>
   </div>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import BookDetail from "./components/bookdetail.vue";
+import ListBook from "./components/listbook.vue";
 export default {
-  name: 'App',
+  name: "app",
   components: {
-    HelloWorld
-  }
-}
+    ListBook,
+    BookDetail,
+    // test1
+  },
+  data() {
+    return {
+      bookSelectedfromchild: {},
+      bookUpdatefromchild: {},
+      isActive1: false,
+      check: false,
+    };
+  },
+  methods: {
+    childSelected(item, isActive) {
+      console.log(item);
+      console.log(isActive);
+      this.isActive1 = true;
+      this.bookSelectedfromchild = item;
+    },
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss" scoped>
 </style>
